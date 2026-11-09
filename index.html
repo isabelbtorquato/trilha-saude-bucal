@@ -1,0 +1,395 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Trilha da Saúde Bucal</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Layout: uma coluna estreita, como um app de celular; o percurso aparece como linha de metrô com estações da rede */
+:root {
+  --bg: #eef3f3;
+  --surface: #ffffff;
+  --ink: #12302f;
+  --muted: #557170;
+  --line: #cfdcdb;
+  --accent: #0f6e5c;
+  --ok: #1b7f4b;
+  --ok-bg: #e2f4ea;
+  --bad: #b3362b;
+  --bad-bg: #fbe7e4;
+  --st-territorio: #7a8b8a;
+  --st-ubs: #1b8a5a;
+  --st-ceo: #2a62b8;
+  --st-lrpd: #c07a12;
+  --st-hospital: #c0392b;
+  --st-uom: #0e8c99;
+  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d1a1a; --surface: #152525; --ink: #e3efee; --muted: #93abaa; --line: #2a3f3f;
+    --accent: #4cc3a6; --ok: #5fd39a; --ok-bg: #12301f; --bad: #f08a7f; --bad-bg: #3a1a17;
+    --st-territorio: #9aabaa; --st-ubs: #43c08a; --st-ceo: #6f9ef0; --st-lrpd: #e6a640; --st-hospital: #ef7b6c; --st-uom: #3cc4d1;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0d1a1a; --surface: #152525; --ink: #e3efee; --muted: #93abaa; --line: #2a3f3f;
+  --accent: #4cc3a6; --ok: #5fd39a; --ok-bg: #12301f; --bad: #f08a7f; --bad-bg: #3a1a17;
+  --st-territorio: #9aabaa; --st-ubs: #43c08a; --st-ceo: #6f9ef0; --st-lrpd: #e6a640; --st-hospital: #ef7b6c; --st-uom: #3cc4d1;
+  color-scheme: dark;
+}
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 20px 40px;
+}
+.wrap { max-width: 640px; margin: 0 auto; display: grid; gap: 20px; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; line-height: 1.15; }
+h1 { font-size: clamp(2rem, 7vw, 2.8rem); font-weight: 800; letter-spacing: -0.02em; }
+h2 { font-size: 1.45rem; font-weight: 800; }
+h3 { font-size: 1.1rem; font-weight: 600; }
+p { margin: 0; }
+.eyebrow { font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+.lead { color: var(--muted); max-width: 60ch; }
+
+/* Linha de metrô decorativa da capa */
+.metro { display: flex; align-items: center; gap: 0; margin-top: 4px; overflow: hidden; }
+.metro span { display: flex; align-items: center; gap: 6px; font-size: 0.78rem; font-weight: 700; color: var(--muted); white-space: nowrap; }
+.metro i { width: 14px; height: 14px; border-radius: 50%; border: 3px solid currentColor; background: var(--bg); flex: none; }
+.metro b { flex: 1 1 18px; min-width: 14px; height: 4px; background: var(--line); margin: 0 6px; }
+
+.chars { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.char {
+  text-align: left; font: inherit; color: inherit; cursor: pointer;
+  background: var(--surface); border: 1.5px solid var(--line); border-radius: 10px;
+  padding: 16px; display: grid; gap: 6px;
+  transition: border-color .15s, transform .15s;
+}
+.char:hover { border-color: var(--accent); transform: translateY(-2px); }
+.char:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.char .age { color: var(--muted); font-size: 0.9rem; }
+.char .tag { font-size: 0.92rem; }
+.char .go { color: var(--accent); font-weight: 700; font-size: 0.9rem; margin-top: 4px; }
+
+details.teacher { border-top: 1.5px solid var(--line); padding-top: 14px; }
+details.teacher summary { cursor: pointer; font-weight: 700; color: var(--accent); }
+details.teacher ol { margin: 10px 0 0; padding-left: 1.3em; display: grid; gap: 6px; }
+.fine { font-size: 0.85rem; color: var(--muted); }
+
+/* Tela do jogo */
+.topbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.back { font: inherit; font-size: 0.9rem; background: none; border: 0; color: var(--muted); cursor: pointer; padding: 4px 0; }
+.score { font-variant-numeric: tabular-nums; font-weight: 700; font-size: 0.95rem; }
+.who { display: grid; gap: 4px; }
+.who p { color: var(--muted); }
+
+.route { display: flex; flex-wrap: wrap; align-items: center; row-gap: 10px; padding: 12px 14px; background: var(--surface); border-radius: 10px; border: 1.5px solid var(--line); min-height: 52px; }
+.route .stop { display: flex; align-items: center; gap: 6px; font-weight: 700; font-size: 0.85rem; }
+.route .dot { width: 16px; height: 16px; border-radius: 50%; border: 4px solid currentColor; background: var(--surface); flex: none; }
+.route .stop.miss .dot { border-style: dashed; }
+.route .seg { width: 22px; height: 4px; border-radius: 2px; background: var(--line); margin: 0 6px; }
+.route .empty { color: var(--muted); font-size: 0.88rem; }
+
+.step { display: grid; gap: 14px; }
+.progress { display: flex; gap: 6px; }
+.progress span { flex: 1; height: 5px; border-radius: 3px; background: var(--line); }
+.progress span.done { background: var(--accent); }
+.scene { font-size: 1.05rem; }
+.question { font-family: var(--display); font-weight: 600; font-size: 1.25rem; }
+.opts { display: grid; gap: 10px; }
+.opt {
+  font: inherit; text-align: left; color: var(--ink); cursor: pointer;
+  background: var(--surface); border: 1.5px solid var(--line); border-radius: 10px; padding: 14px 16px;
+  display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: start;
+}
+.opt:hover:not(:disabled) { border-color: var(--accent); }
+.opt:disabled { cursor: default; }
+.opt .k { font-family: var(--display); font-weight: 800; color: var(--muted); width: 1.2em; }
+.opt.right { border-color: var(--ok); background: var(--ok-bg); }
+.opt.wrong { border-color: var(--bad); background: var(--bad-bg); }
+.opt.dim { opacity: 0.55; }
+
+.fb { border-radius: 10px; padding: 14px 16px; display: grid; gap: 6px; border-left: 5px solid; background: var(--surface); }
+.fb.ok { border-color: var(--ok); }
+.fb.no { border-color: var(--bad); }
+.fb .verdict { font-weight: 700; }
+.fb.ok .verdict { color: var(--ok); }
+.fb.no .verdict { color: var(--bad); }
+.fb .why-right { border-top: 1px solid var(--line); padding-top: 8px; margin-top: 4px; }
+
+.btn {
+  font: inherit; font-weight: 700; cursor: pointer; justify-self: start;
+  background: var(--accent); color: var(--bg); border: 0; border-radius: 8px; padding: 12px 20px;
+}
+.btn.ghost { background: none; color: var(--accent); border: 1.5px solid var(--accent); }
+.row { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.final { display: grid; gap: 14px; }
+.big { font-family: var(--display); font-weight: 800; font-size: 3rem; line-height: 1; font-variant-numeric: tabular-nums; }
+.discuss { background: var(--surface); border: 1.5px solid var(--line); border-radius: 10px; padding: 14px 16px; display: grid; gap: 6px; }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap" id="app"></div>
+
+<script>
+const ST = {
+  territorio: { label: "Território", color: "var(--st-territorio)" },
+  ubs: { label: "UBS", color: "var(--st-ubs)" },
+  ceo: { label: "CEO", color: "var(--st-ceo)" },
+  lrpd: { label: "LRPD", color: "var(--st-lrpd)" },
+  hospital: { label: "Hospital", color: "var(--st-hospital)" },
+  uom: { label: "Unid. Móvel", color: "var(--st-uom)" },
+};
+
+const CASES = [
+  {
+    id: "maria", name: "Dona Maria", age: "58 anos", tag: "Dor de dente e dentes perdidos",
+    intro: "Dona Maria acordou às 3h com dor forte num molar inferior. Ela tem outros dentes com cárie, muito cálculo e perdeu vários dentes ao longo da vida.",
+    discuss: "Quanto tempo Dona Maria esperaria na regulação do seu município pelo canal no CEO? O que a equipe da UBS pode fazer para que essa espera não vire nova urgência?",
+    steps: [
+      { st: "ubs", scene: "A UBS abre às 7h. A dor não passou com analgésico.", q: "Qual é o caminho mais adequado?", opts: [
+        { t: "Ir à UBS assim que abrir: dor é acolhida como demanda espontânea, sem agendamento", ok: true, fb: "A equipe de Saúde Bucal da Atenção Primária deve reservar espaço na agenda para urgências. A dor é acolhida no mesmo dia e o restante do cuidado é programado a partir daí." },
+        { t: "Ligar para a UBS e pedir a primeira vaga de consulta programada", fb: "Consulta programada é para tratamento eletivo. Quem chega com dor deve ser acolhido no mesmo dia, sem entrar na fila de agendamento." },
+        { t: "Procurar o CEO, que atende urgências endodônticas", fb: "O CEO é atenção especializada e recebe pacientes referenciados. A urgência endodôntica (abertura e medicação) é resolvida na Atenção Primária ou no pronto atendimento." },
+        { t: "Ir à UPA, porque todo município tem dentista de plantão 24h", fb: "Pronto atendimento odontológico 24h existe em alguns municípios, não em todos. Com a UBS aberta, ela é o caminho preferencial." },
+      ]},
+      { st: "ubs", scene: "A dentista faz a abertura e a medicação do canal de urgência. O molar vai precisar de tratamento endodôntico completo.", q: "O que deve acontecer antes do encaminhamento ao CEO?", opts: [
+        { t: "Adequar o meio bucal na UBS (raspagem, restaurações, controle de placa) e então encaminhar pela regulação, com ficha de referência", ok: true, fb: "Os protocolos de referência ao CEO pedem que a Atenção Primária faça a adequação do meio bucal antes. Assim o especialista recebe um caso preparado e a vaga especializada rende mais." },
+        { t: "Encaminhar logo, porque o CEO faz a adequação junto com o canal", fb: "O CEO é retaguarda especializada. A adequação do meio bucal é responsabilidade da Atenção Primária, e encaminhar sem ela costuma gerar devolução do caso." },
+        { t: "Ligar para um colega do CEO e pedir um encaixe", fb: "Encaixe informal fura a fila e fere a equidade. O acesso à atenção especializada é organizado pela regulação, com critérios de prioridade." },
+        { t: "Indicar a extração, porque endodontia de molar não é oferecida pelo SUS", fb: "Endodontia, inclusive de molares, está entre os procedimentos do CEO. Extrair por falta de oferta repete o modelo mutilador que a PNSB quer superar." },
+      ]},
+      { st: "ceo", scene: "Maria foi atendida no CEO e o canal foi concluído.", q: "Como o cuidado deve continuar?", opts: [
+        { t: "O CEO envia contrarreferência à equipe da UBS, que faz a restauração definitiva e segue acompanhando", ok: true, fb: "A contrarreferência fecha o circuito: o especialista informa o que foi feito e a Atenção Primária retoma a coordenação do cuidado." },
+        { t: "O CEO faz a restauração definitiva e mantém controle anual do dente", fb: "O CEO resolve a demanda especializada. A coordenação do cuidado e o acompanhamento ao longo do tempo são da Atenção Primária." },
+        { t: "O CEO dá alta e Maria marca a restauração na UBS por conta própria", fb: "Sem contrarreferência formal, a UBS não sabe o que foi feito e o dente pode ficar sem restauração. A comunicação entre os serviços é papel da rede, não da paciente." },
+        { t: "Maria volta para a fila da regulação para fazer a restauração", fb: "Restauração é procedimento da Atenção Primária e não passa pela regulação especializada." },
+      ]},
+      { st: "lrpd", scene: "Falta reabilitar os dentes perdidos. O município de Maria não tem laboratório de prótese próprio.", q: "Como ela consegue a prótese parcial removível?", opts: [
+        { t: "A gestão pode usar um LRPD contratado ou de outro município; a equipe faz a moldagem e a instalação", ok: true, fb: "Os Laboratórios Regionais de Prótese Dentária podem ser próprios ou contratados e atender mais de um município. A reabilitação protética é linha de ação do Brasil Sorridente desde 2004." },
+        { t: "Sem laboratório no município, não há oferta de prótese pelo SUS", fb: "A ausência de laboratório próprio não impede a oferta. O município pode contratar ou pactuar com a região." },
+        { t: "Ela deve ser encaminhada ao CEO, que tem prótese como especialidade obrigatória", fb: "As especialidades mínimas do CEO são diagnóstico bucal, periodontia, cirurgia oral menor, endodontia e atendimento a pessoas com deficiência. Prótese não está entre elas." },
+        { t: "O SUS só oferece prótese total, não a parcial removível", fb: "Os LRPD confeccionam próteses totais e também parciais removíveis." },
+      ]},
+    ],
+  },
+  {
+    id: "jose", name: "Seu José", age: "67 anos", tag: "Ferida na língua que não cicatriza",
+    intro: "Seu José fuma há 40 anos e usa prótese total. Há três semanas tem uma úlcera na borda lateral da língua que não sara. Ele acha que é a dentadura machucando.",
+    discuss: "Que ações a equipe de Saúde Bucal poderia fazer no território para encontrar casos como o de Seu José mais cedo?",
+    steps: [
+      { st: "territorio", scene: "Na visita domiciliar, ele comenta a ferida com a agente comunitária de saúde.", q: "Qual é a conduta mais adequada?", opts: [
+        { t: "A agente leva o caso à equipe e ele é avaliado pela equipe de Saúde Bucal com prioridade", ok: true, fb: "Idoso, tabagista, lesão em borda lateral de língua há mais de 15 dias: é um caso de risco. A agente comunitária faz a ponte e a avaliação não deve esperar a agenda de rotina." },
+        { t: "Orientar que ele tire a prótese por 15 dias e procure a UBS se não melhorar", fb: "Remover o fator traumático e reavaliar é conduta válida para lesões recentes. Com três semanas de evolução e fatores de risco, o caso já precisa de avaliação." },
+        { t: "Agendar consulta odontológica na próxima vaga programada", fb: "A agenda de rotina pode levar semanas. Lesão suspeita em paciente de risco precisa de avaliação prioritária." },
+        { t: "Orientar a procurar um hospital de oncologia", fb: "O acesso à alta complexidade é organizado pela rede a partir da Atenção Primária. Sem diagnóstico, ele nem conseguiria entrar no serviço." },
+      ]},
+      { st: "ceo", scene: "A dentista da UBS examina: úlcera endurecida, bordas elevadas, sem relação clara com a prótese.", q: "Qual é o próximo passo?", opts: [
+        { t: "Encaminhar ao CEO com prioridade, para diagnóstico bucal e biópsia", ok: true, fb: "Diagnóstico bucal com ênfase no câncer de boca é especialidade mínima do CEO. Lesão suspeita deve ser sinalizada como prioridade na regulação." },
+        { t: "Encaminhar direto ao hospital oncológico, para ganhar tempo", fb: "O tratamento oncológico depende do diagnóstico histopatológico. Sem biópsia, o encaminhamento não avança." },
+        { t: "Ajustar a prótese, prescrever antifúngico e reavaliar em 15 dias", fb: "Com essas características clínicas, adiar a investigação atrasa o diagnóstico. Ajustes podem ser feitos, mas junto com o encaminhamento." },
+        { t: "Solicitar exames de sangue e aguardar os resultados para decidir", fb: "Exames de sangue não esclarecem lesão suspeita na boca. O exame que define o diagnóstico é a biópsia." },
+      ]},
+      { st: "hospital", scene: "A biópsia confirma carcinoma espinocelular. Ele é encaminhado a uma unidade habilitada em oncologia.", q: "Pela legislação, qual é o prazo para começar o tratamento no SUS?", opts: [
+        { t: "Até 60 dias a partir do diagnóstico em laudo patológico", ok: true, fb: "A Lei nº 12.732/2012 garante o início do tratamento em até 60 dias. A Lei nº 13.896/2019 acrescentou que, na suspeita de câncer, os exames diagnósticos devem sair em até 30 dias." },
+        { t: "Até 30 dias a partir do diagnóstico", fb: "Os 30 dias valem para os exames de diagnóstico na suspeita de câncer (Lei nº 13.896/2019). Para o início do tratamento, o prazo é de 60 dias." },
+        { t: "Até 90 dias a partir da primeira consulta no hospital", fb: "O prazo legal é de 60 dias, contados do diagnóstico em laudo patológico." },
+        { t: "Não há prazo legal; depende da fila de cada hospital", fb: "Há prazo em lei: 60 dias a partir do diagnóstico (Lei nº 12.732/2012)." },
+      ]},
+      { st: "hospital", scene: "O plano inclui radioterapia de cabeça e pescoço. Ele tem dois dentes inferiores com doença periodontal avançada.", q: "Qual é o papel da odontologia antes da radioterapia?", opts: [
+        { t: "Avaliar e adequar a boca antes de começar, incluindo a extração dos dentes sem prognóstico", ok: true, fb: "Extrair dentes condenados antes da radioterapia reduz o risco de osteorradionecrose. A saúde bucal participa do cuidado também na alta complexidade." },
+        { t: "Deixar as extrações para depois da radioterapia, para não atrasar o tratamento", fb: "Extrações em área irradiada aumentam muito o risco de osteorradionecrose. A adequação bucal deve vir antes." },
+        { t: "Não intervir: a odontologia só entra depois do tratamento oncológico", fb: "A avaliação odontológica antes da radioterapia é parte do protocolo, justamente para prevenir complicações." },
+        { t: "Confeccionar uma prótese nova para ele usar durante a radioterapia", fb: "Durante a radioterapia a mucosa fica sensível e a prótese pode machucar. A reabilitação vem depois, no momento adequado." },
+      ]},
+      { st: "ubs", scene: "Seu José terminou a radioterapia e voltou para casa com boca seca.", q: "O que a equipe da UBS deve fazer?", opts: [
+        { t: "Acompanhar de perto: flúor, manejo da boca seca, apoio para parar de fumar e cuidado com extrações futuras", ok: true, fb: "A contrarreferência devolve o cuidado à Atenção Primária, que acompanha a boca irradiada, trabalha os fatores de risco e articula a reabilitação no tempo certo." },
+        { t: "Fazer as extrações que ficaram pendentes na própria UBS", fb: "Extração em área irradiada tem alto risco de osteorradionecrose e exige avaliação e cuidados especiais, em articulação com o serviço especializado." },
+        { t: "Nada: ele segue acompanhado só pelo hospital", fb: "O hospital faz o seguimento oncológico, mas o cuidado bucal contínuo e o vínculo são da Atenção Primária." },
+        { t: "Encaminhar logo ao LRPD para uma prótese nova", fb: "A reabilitação é importante, mas depende da cicatrização e da avaliação da mucosa irradiada. Não é o primeiro passo." },
+      ]},
+    ],
+  },
+  {
+    id: "lucas", name: "Lucas", age: "9 anos", tag: "Autismo e várias cáries",
+    intro: "Lucas é autista e tem cáries em vários dentes, duas delas profundas. Na última tentativa de consulta ficou muito agitado e o atendimento não aconteceu.",
+    discuss: "Como a equipe poderia preparar a família e o ambiente da UBS para receber crianças como Lucas?",
+    steps: [
+      { st: "ubs", scene: "A mãe de Lucas procura a UBS do bairro.", q: "Onde e como o cuidado deve começar?", opts: [
+        { t: "Na UBS: acolher, construir vínculo e tentar o tratamento com adaptação gradual e manejo do comportamento", ok: true, fb: "A Atenção Primária é porta de entrada também para pessoas com deficiência. Muitas podem ser atendidas ali com tempo, vínculo e técnicas de manejo." },
+        { t: "Encaminhar direto ao CEO, porque pessoas com deficiência são atendidas lá", fb: "O CEO é referência para os casos que a Atenção Primária não consegue resolver. Encaminhar sem tentar sobrecarrega o serviço especializado." },
+        { t: "Encaminhar ao Centro Especializado em Reabilitação (CER)", fb: "O CER faz reabilitação física, auditiva, visual e intelectual. O tratamento odontológico é feito pela rede de saúde bucal." },
+        { t: "Fazer só ações preventivas na UBS e deixar as restaurações para o CEO", fb: "Prevenção é essencial, mas a equipe deve tentar resolver o que for possível. Encaminha-se o que não for." },
+      ]},
+      { st: "ceo", scene: "Depois de várias consultas, a equipe da UBS não consegue concluir as restaurações.", q: "Qual é o próximo passo?", opts: [
+        { t: "Encaminhar ao CEO, de preferência um que integre a Rede de Cuidados à Pessoa com Deficiência", ok: true, fb: "Atendimento a pessoas com deficiência é especialidade mínima do CEO. Os CEO que aderem à Rede de Cuidados à Pessoa com Deficiência recebem incentivo para ampliar esse atendimento." },
+        { t: "Encaminhar direto ao hospital para anestesia geral, já que a UBS não conseguiu", fb: "Na maioria dos protocolos, o CEO avalia antes. A anestesia geral é indicada quando o atendimento ambulatorial especializado também não é possível." },
+        { t: "Usar estabilização protetora na UBS para concluir tudo numa sessão", fb: "Estabilização protetora exige indicação precisa, consentimento e preparo. Não é atalho para concluir um tratamento extenso." },
+        { t: "Extrair os dentes com cárie profunda e encerrar o tratamento", fb: "São dentes que podem ser tratados. Extrair por dificuldade de manejo é a lógica mutiladora." },
+      ]},
+      { st: "hospital", scene: "No CEO, a equipe indica tratamento em centro cirúrgico, sob anestesia geral.", q: "O que é essencial nessa etapa?", opts: [
+        { t: "Planejar o tratamento completo para uma única intervenção, com avaliação pré-anestésica", ok: true, fb: "A atenção hospitalar faz parte da rede de saúde bucal. A ideia é resolver tudo numa intervenção, para que a criança não precise de nova anestesia geral." },
+        { t: "Fazer só as extrações, para reduzir o tempo de centro cirúrgico", fb: "O tempo cirúrgico importa, mas o objetivo é tratar. Restaurações e endodontias também podem ser feitas sob anestesia geral." },
+        { t: "Tratar só os dentes com dor e deixar o restante para o consultório", fb: "Tratamento parcial aumenta a chance de uma nova anestesia geral. O planejamento deve ser completo." },
+        { t: "Dispensar avaliação pré-anestésica, porque é procedimento odontológico", fb: "Toda anestesia geral exige avaliação pré-anestésica, seja qual for o procedimento." },
+      ]},
+      { st: "ubs", scene: "O tratamento foi concluído no hospital.", q: "Como deve ser o acompanhamento?", opts: [
+        { t: "Contrarreferência à equipe da UBS, com retornos frequentes, flúor e orientação à família", ok: true, fb: "A prevenção contínua na Atenção Primária é o que evita que Lucas precise de anestesia geral de novo." },
+        { t: "Manutenção semestral no CEO, que já conhece o caso", fb: "O CEO pode apoiar, mas o acompanhamento de rotina e a prevenção são da Atenção Primária, perto da família." },
+        { t: "Revisão anual no hospital, sob anestesia geral", fb: "Anestesia geral não é estratégia de manutenção. O objetivo é que ela não seja mais necessária." },
+        { t: "Alta definitiva, com orientações por escrito para a família", fb: "Orientação escrita ajuda, mas sem acompanhamento as cáries voltam e o ciclo se repete." },
+      ]},
+    ],
+  },
+  {
+    id: "ana", name: "Ana", age: "26 anos", tag: "Gestante na zona rural",
+    intro: "Ana está grávida de 5 meses e mora numa comunidade rural a 40 km da UBS. A gengiva sangra e um dente tem cárie profunda. Ela acha que grávida não pode ir ao dentista.",
+    discuss: "Que outras populações do Espírito Santo têm dificuldade de chegar à UBS? Como a rede poderia alcançá-las?",
+    steps: [
+      { st: "uom", scene: "A comunidade fica longe e o transporte é difícil.", q: "Qual estratégia da política foi pensada para esse tipo de território?", opts: [
+        { t: "Unidade Odontológica Móvel, vinculada a uma equipe de referência", ok: true, fb: "As Unidades Odontológicas Móveis levam atendimento a áreas rurais e de difícil acesso, ligadas a uma equipe da Atenção Primária. Chegar a quem está longe é uma questão de equidade." },
+        { t: "Teleodontologia, que substitui o exame presencial", fb: "A telessaúde apoia a equipe e orienta o paciente, mas não substitui exame e tratamento presenciais." },
+        { t: "Equipe de Saúde Bucal modalidade II", fb: "A modalidade II se refere à composição da equipe (com técnico em saúde bucal), não ao acesso em áreas remotas." },
+        { t: "CEO itinerante, que circula pela zona rural", fb: "O CEO é um estabelecimento fixo de atenção especializada. Para áreas remotas, a estratégia é a unidade móvel." },
+      ]},
+      { st: "uom", scene: "Ana está no segundo trimestre. Precisa de raspagem e de uma restauração com anestesia.", q: "Qual é a conduta correta?", opts: [
+        { t: "Tratar agora; lidocaína com epinefrina é segura nas doses usuais", ok: true, fb: "O segundo trimestre é o período mais indicado para procedimentos eletivos. Lidocaína 2% com epinefrina 1:100.000 é segura na gestação, respeitando a dose. O atendimento odontológico faz parte do pré-natal." },
+        { t: "Tratar, mas usar anestésico sem vasoconstritor", fb: "Sem vasoconstritor a anestesia dura menos e a absorção sistêmica é maior. Lidocaína com epinefrina é a escolha segura na gestação." },
+        { t: "Fazer só a raspagem e deixar a restauração para depois do parto", fb: "Adiar a restauração de uma cárie profunda arrisca dor e infecção durante a gestação, o que é pior para mãe e bebê." },
+        { t: "Pedir autorização por escrito do obstetra antes de qualquer procedimento", fb: "A comunicação com o pré-natal é desejável, mas não é exigida autorização escrita para atendimento odontológico de rotina." },
+      ]},
+      { st: "uom", scene: "Para avaliar o dente, a dentista precisa de uma radiografia periapical.", q: "Ela pode fazer o exame?", opts: [
+        { t: "Sim, com indicação justificada, avental plumbífero e protetor de tireoide", ok: true, fb: "A dose de uma radiografia periapical é muito baixa. Com indicação e proteção adequadas, ela pode ser feita em qualquer fase da gestação." },
+        { t: "Não, radiografia é contraindicada durante toda a gestação", fb: "É um mito comum. Com proteção e indicação justificada, a radiografia odontológica é segura." },
+        { t: "Só no terceiro trimestre, quando o bebê já está formado", fb: "Não há restrição por trimestre para radiografia odontológica com proteção adequada." },
+        { t: "Só radiografia panorâmica, que tem menos radiação", fb: "A periapical tem dose menor que a panorâmica e é o exame indicado para avaliar um dente." },
+      ]},
+      { st: "ubs", scene: "O bebê de Ana nasceu.", q: "Quando deve acontecer a primeira consulta odontológica da criança?", opts: [
+        { t: "Até o primeiro ano de vida, de preferência com a erupção do primeiro dente", ok: true, fb: "A primeira consulta cedo permite orientar a família e prevenir a cárie na primeira infância. O vínculo com a mãe, criado no pré-natal, facilita esse acompanhamento." },
+        { t: "Aos 3 anos, com a dentição decídua completa", fb: "Esperar a dentição completa perde a janela de prevenção. A cárie pode começar logo após a erupção dos primeiros dentes." },
+        { t: "Quando a criança tiver idade para colaborar, por volta dos 6 anos", fb: "Aos 6 anos muitas crianças já têm cárie. A orientação precisa começar antes." },
+        { t: "Só se a família notar alguma alteração", fb: "Esperar queixa transforma prevenção em tratamento. A consulta deve ser programada." },
+      ]},
+    ],
+  },
+];
+
+const app = document.getElementById("app");
+let state = { screen: "home", caseId: null, i: 0, score: 0, route: [], answered: null, order: [] };
+
+function esc(s) { return s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
+function shuffle(n) { const a = [...Array(n).keys()]; for (let i = n - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+const cur = () => CASES.find(c => c.id === state.caseId);
+
+function routeHTML(route) {
+  if (!route.length) return `<div class="route"><span class="empty">O caminho aparece aqui conforme vocês avançam.</span></div>`;
+  return `<div class="route" aria-label="Percurso na rede">${route.map((r, k) =>
+    `${k ? '<span class="seg" aria-hidden="true"></span>' : ""}<span class="stop ${r.ok ? "" : "miss"}" style="color:${ST[r.st].color}"><span class="dot"></span>${ST[r.st].label}</span>`
+  ).join("")}</div>`;
+}
+
+function home() {
+  const metro = ["territorio", "ubs", "ceo", "lrpd", "hospital"].map((s, k) =>
+    `${k ? "<b></b>" : ""}<span style="color:${ST[s].color}"><i></i>${ST[s].label}</span>`).join("");
+  app.innerHTML = `
+    <header style="display:grid;gap:10px">
+      <p class="eyebrow">Política Nacional de Saúde Bucal</p>
+      <h1>Trilha da Saúde Bucal</h1>
+      <p class="lead">Escolham uma personagem e levem ela pela rede do SUS, da porta de entrada até o fim do cuidado. A cada etapa, decidam juntos o próximo passo.</p>
+      <div class="metro" aria-hidden="true">${metro}</div>
+    </header>
+    <section class="chars" aria-label="Personagens">
+      ${CASES.map(c => `
+        <button class="char" data-id="${c.id}">
+          <h3>${c.name}</h3>
+          <span class="age">${c.age} · ${c.steps.length} etapas</span>
+          <span class="tag">${c.tag}</span>
+          <span class="go">Começar →</span>
+        </button>`).join("")}
+    </section>
+    <p class="fine">Baseado na Lei nº 14.572/2023 e nas Diretrizes da Política Nacional de Saúde Bucal (2004). O fluxo real pode variar entre municípios.</p>`;
+  app.querySelectorAll(".char").forEach(b => b.onclick = () => start(b.dataset.id));
+}
+
+function start(id) {
+  state = { screen: "step", caseId: id, i: 0, score: 0, route: [], answered: null, order: shuffle(CASES.find(c => c.id === id).steps[0].opts.length) };
+  render(); window.scrollTo(0, 0);
+}
+
+function step() {
+  const c = cur(), s = c.steps[state.i], a = state.answered;
+  const prog = c.steps.map((_, k) => `<span class="${k < state.i || (k === state.i && a !== null) ? "done" : ""}"></span>`).join("");
+  const opts = state.order.map((oi, k) => {
+    const o = s.opts[oi];
+    let cls = "";
+    if (a !== null) cls = o.ok ? "right" : (oi === a ? "wrong" : "dim");
+    return `<button class="opt ${cls}" data-oi="${oi}" ${a !== null ? "disabled" : ""}><span class="k">${"ABCD"[k]}</span><span>${esc(o.t)}</span></button>`;
+  }).join("");
+  let fb = "";
+  if (a !== null) {
+    const chosen = s.opts[a], right = s.opts.find(o => o.ok);
+    const last = state.i === c.steps.length - 1;
+    fb = `<div class="fb ${chosen.ok ? "ok" : "no"}" role="status">
+        <span class="verdict">${chosen.ok ? "Caminho certo" : "Esse não é o melhor caminho"}</span>
+        <p>${esc(chosen.fb)}</p>
+        ${chosen.ok ? "" : `<p class="why-right"><strong>Melhor caminho:</strong> ${esc(right.fb)}</p>`}
+      </div>
+      <button class="btn" id="next">${last ? "Ver resultado" : "Próxima etapa"}</button>`;
+  }
+  app.innerHTML = `
+    <div class="topbar"><button class="back" id="back">← Trocar personagem</button><span class="score">${state.score} acerto${state.score === 1 ? "" : "s"}</span></div>
+    <div class="who"><h2>${c.name}, ${c.age}</h2><p>${esc(c.intro)}</p></div>
+    ${routeHTML(state.route)}
+    <section class="step">
+      <div class="progress" aria-label="Etapa ${state.i + 1} de ${c.steps.length}">${prog}</div>
+      <p class="eyebrow">Etapa ${state.i + 1} de ${c.steps.length}</p>
+      <p class="scene">${esc(s.scene)}</p>
+      <p class="question">${esc(s.q)}</p>
+      <div class="opts">${opts}</div>
+      ${fb}
+    </section>`;
+  document.getElementById("back").onclick = () => { state.screen = "home"; render(); };
+  app.querySelectorAll(".opt:not(:disabled)").forEach(b => b.onclick = () => {
+    const oi = +b.dataset.oi, ok = !!s.opts[oi].ok;
+    state.answered = oi; if (ok) state.score++;
+    state.route.push({ st: s.st, ok });
+    render();
+    document.querySelector(".fb")?.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "nearest" });
+  });
+  const nx = document.getElementById("next");
+  if (nx) nx.onclick = () => {
+    if (state.i === c.steps.length - 1) state.screen = "end";
+    else { state.i++; state.answered = null; state.order = shuffle(c.steps[state.i].opts.length); }
+    render(); window.scrollTo(0, 0);
+  };
+}
+
+function end() {
+  const c = cur(), n = c.steps.length, sc = state.score;
+  const msg = sc === n ? "A personagem percorreu a rede sem tropeços." : sc >= n / 2 ? "Boa parte do caminho certo. Revejam as etapas tracejadas." : "A rede ficou confusa. Vale rever onde cada serviço entra.";
+  app.innerHTML = `
+    <div class="topbar"><button class="back" id="back">← Personagens</button></div>
+    <section class="final">
+      <p class="eyebrow">Fim da trilha · ${c.name}</p>
+      <div class="big">${sc}/${n}</div>
+      <p>${msg}</p>
+      <h3>Caminho de ${c.name} na rede</h3>
+      ${routeHTML(state.route)}
+      <p class="fine">Estações tracejadas indicam etapas em que o grupo escolheu outro caminho.</p>
+      <div class="discuss"><p class="eyebrow">Para discutir com a turma</p><p>${esc(c.discuss)}</p></div>
+      <div class="row"><button class="btn" id="again">Jogar de novo</button><button class="btn ghost" id="other">Outra personagem</button></div>
+    </section>`;
+  document.getElementById("back").onclick = document.getElementById("other").onclick = () => { state.screen = "home"; render(); };
+  document.getElementById("again").onclick = () => start(c.id);
+}
+
+function render() { state.screen === "home" ? home() : state.screen === "step" ? step() : end(); }
+render();
+</script>
+
+</body></html>
